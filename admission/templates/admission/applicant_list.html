@@ -31,4 +31,38 @@
     {% endfor %}
   </tbody>
 </table>
+<div class="mt-4">
+  <h5>Exportar Postulantes</h5>
+  <button id="btn-pdf-applicants" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button id="btn-email-applicants" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
+  <div id="status-applicants" class="mt-2 text-muted"></div>
+</div>
+
+<script>
+  document.getElementById('btn-pdf-applicants').addEventListener('click', function () {
+    fetch('/applicants/pdf/')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'postulantes.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+  });
+
+  document.getElementById('btn-email-applicants').addEventListener('click', function () {
+    fetch('/send-applicants-email/')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('status-applicants').innerText = '✅ Correo enviado con éxito';
+      })
+      .catch(error => {
+        document.getElementById('status-applicants').innerText = '❌ Error al enviar el correo';
+        console.error(error);
+      });
+  });
+</script>
 {% endblock %}

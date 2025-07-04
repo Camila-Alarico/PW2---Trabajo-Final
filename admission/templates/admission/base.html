@@ -9,7 +9,49 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'applicant_list' %}">Cuna UNSA</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Cuna UNSA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Postulantes -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'applicant_list' %}">Postulantes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'applicant_create' %}">Crear Postulante</a>
+        </li>
+
+        <!-- Padres -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parent_list' %}">Padres</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parent_create' %}">Crear Padre</a>
+        </li>
+
+        <!-- Pagos -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'payment_list' %}">Pagos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'payment_create' %}">Crear Pago</a>
+        </li>
+
+        <!-- Etapas -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'stage_list' %}">Etapas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'stage_create' %}">Crear Etapa</a>
+        </li>
+
+      </ul>
+    </div>
   </div>
 </nav>
 

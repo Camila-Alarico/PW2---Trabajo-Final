@@ -1,0 +1,25 @@
+{% extends 'admission/base.html' %}
+{% block title %}Etapas del Proceso{% endblock %}
+{% block content %}
+<h2>Etapas del Proceso de Admisión</h2>
+<a href="{% url 'stage_create' %}" class="btn btn-primary mb-3">Nueva Etapa</a>
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Postulante</th><th>Etapa</th><th>Fecha</th><th>Completado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stage in stages %}
+    <tr>
+      <td>{{ stage.applicant.full_name }}</td>
+      <td>{{ stage.stage }}</td>
+      <td>{{ stage.date }}</td>
+      <td>{% if stage.completed %}✔{% else %}✖{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No hay etapas registradas.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

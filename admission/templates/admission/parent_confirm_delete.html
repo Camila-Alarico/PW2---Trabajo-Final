@@ -1,0 +1,9 @@
+{% extends 'admission/base.html' %}
+{% block title %}Eliminar Apoderado{% endblock %}
+{% block content %}
+<h2>¿Eliminar a "{{ parent.full_name }}"?</h2>
+<form method="post">{% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'parent_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

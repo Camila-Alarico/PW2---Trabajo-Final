@@ -66,3 +66,7 @@ class AdmissionStageForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+def applicant_json_api(request):
+    data = list(Applicant.objects.values('id', 'full_name', 'grade_applied', 'dni'))
+    return JsonResponse(data, safe=False)

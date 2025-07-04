@@ -1,0 +1,37 @@
+{% extends 'admission/base.html' %}
+
+{% block title %}Lista JSON con AJAX{% endblock %}
+
+{% block content %}
+<h2>Postulantes vía AJAX</h2>
+<button id="loadData" class="btn btn-primary mb-3">Cargar Datos</button>
+<table class="table table-bordered" id="resultTable">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Aula</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+document.getElementById("loadData").addEventListener("click", function () {
+    fetch("/api/applicants/")
+    .then(response => response.json())
+    .then(data => {
+        const tbody = document.querySelector("#resultTable tbody");
+        tbody.innerHTML = "";
+        data.forEach(applicant => {
+            const row = `<tr>
+                <td>${applicant.full_name}</td>
+                <td>${applicant.dni}</td>
+                <td>${applicant.grade_applied}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    });
+});
+</script>
+{% endblock %}

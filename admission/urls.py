@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.shortcuts import render
 
 urlpatterns = [
     path('applicants/', views.ApplicantListView.as_view(), name='applicant_list'),
@@ -7,4 +8,24 @@ urlpatterns = [
     path('applicants/create/', views.ApplicantCreateView.as_view(), name='applicant_create'),
     path('applicants/<int:pk>/edit/', views.ApplicantUpdateView.as_view(), name='applicant_update'),
     path('applicants/<int:pk>/delete/', views.ApplicantDeleteView.as_view(), name='applicant_delete'),
+    # PADRES
+    path('parents/', views.ParentListView.as_view(), name='parent_list'),
+    path('parents/create/', views.ParentCreateView.as_view(), name='parent_create'),
+    path('parents/<int:pk>/edit/', views.ParentUpdateView.as_view(), name='parent_update'),
+    path('parents/<int:pk>/delete/', views.ParentDeleteView.as_view(), name='parent_delete'),
+
+    # PAGOS
+    path('payments/', views.PaymentListView.as_view(), name='payment_list'),
+    path('payments/create/', views.PaymentCreateView.as_view(), name='payment_create'),
+
+    # ETAPAS
+    path('stages/', views.AdmissionStageListView.as_view(), name='stage_list'),
+    path('stages/create/', views.AdmissionStageCreateView.as_view(), name='stage_create'),
+
+    # API JSON
+    path('api/applicants/', views.applicant_json_api, name='applicant_json_api'),
+
+    # AJAX DEMO PAGE
+    path('ajax-demo/', lambda r: render(r, 'admission/ajax_list.html'), name='ajax_demo'),
+
 ]

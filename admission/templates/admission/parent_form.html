@@ -1,0 +1,10 @@
+{% extends 'admission/base.html' %}
+{% block title %}Formulario Apoderado{% endblock %}
+{% block content %}
+<h2>{{ form.instance.pk|yesno:"Editar Apoderado,Nuevo Apoderado" }}</h2>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Guardar</button>
+  <a href="{% url 'parent_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

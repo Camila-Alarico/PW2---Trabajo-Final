@@ -1,0 +1,16 @@
+{% extends 'admission/base.html' %}
+
+{% block title %}Detalle del Postulante{% endblock %}
+
+{% block content %}
+<h2>{{ applicant.full_name }}</h2>
+<ul class="list-group">
+  <li class="list-group-item"><strong>DNI:</strong> {{ applicant.dni }}</li>
+  <li class="list-group-item"><strong>Fecha de Nacimiento:</strong> {{ applicant.birth_date }}</li>
+  <li class="list-group-item"><strong>Aula:</strong> {{ applicant.grade_applied }}</li>
+  <li class="list-group-item"><strong>Apoderado:</strong> {{ applicant.parent }}</li>
+</ul>
+<br>
+<a href="{% url 'applicant_update' applicant.pk %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'applicant_list' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'admission/base.html' %}
+
+{% block title %}Eliminar Postulante{% endblock %}
+
+{% block content %}
+<h2>¿Estás seguro de que deseas eliminar a "{{ applicant.full_name }}"?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'applicant_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

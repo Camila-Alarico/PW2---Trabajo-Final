@@ -26,4 +26,39 @@
     {% endfor %}
   </tbody>
 </table>
+
+<div class="mt-4">
+  <h5>Exportar Apoderados</h5>
+  <button id="btn-pdf-parents" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button id="btn-email-parents" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
+  <div id="status-parents" class="mt-2 text-muted"></div>
+</div>
+
+<script>
+  document.getElementById('btn-pdf-parents').addEventListener('click', function () {
+    fetch('/parents/pdf/')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'apoderados.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+  });
+
+  document.getElementById('btn-email-parents').addEventListener('click', function () {
+    fetch('/send-parents-email/')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('status-parents').innerText = '✅ Correo enviado con éxito';
+      })
+      .catch(error => {
+        document.getElementById('status-parents').innerText = '❌ Error al enviar el correo';
+        console.error(error);
+      });
+  });
+</script>
 {% endblock %}

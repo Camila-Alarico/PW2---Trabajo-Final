@@ -88,3 +88,7 @@ class AdmissionStageCreateView(CreateView):
 def applicant_json_api(request):
     data = list(Applicant.objects.values('id', 'full_name', 'grade_applied', 'dni'))
     return JsonResponse(data, safe=False)
+
+# Poner base en la pagina principal
+def home(request):
+    return render(request, 'admission/home.html')

@@ -4,7 +4,7 @@
 <h2>{{ form.instance.pk|yesno:"Editar Apoderado,Nuevo Apoderado" }}</h2>
 <form method="post">{% csrf_token %}
   {% for field in form %}
-  <div class="mb-3">
+  <div class="mb-3" id="field-{{ field.name }}">
     <label class="form-label">{{ field.label }}</label>
     {{ field }}
     {% if field.help_text %}
@@ -19,4 +19,18 @@
   <button type="submit" class="btn btn-success">Guardar</button>
   <a href="{% url 'parent_list' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+<script>
+  function toggleUniversityFields() {
+    const checkbox = document.querySelector('#id_has_university_affiliation');
+    const show = checkbox.checked;
+
+    ['university_role', 'university_area', 'university_relationship_details'].forEach(name => {
+      const div = document.getElementById('field-' + name);
+      if (div) div.style.display = show ? 'block' : 'none';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', toggleUniversityFields);
+  document.querySelector('#id_has_university_affiliation').addEventListener('change', toggleUniversityFields);
+</script> 
 {% endblock %}

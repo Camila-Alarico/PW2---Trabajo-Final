@@ -23,6 +23,7 @@ class ApplicantForm(forms.ModelForm):
             'grade_applied': forms.Select(attrs={'class': 'form-select'}),
             'dni': forms.TextInput(attrs={'class': 'form-control'}),
             'parent': forms.Select(attrs={'class': 'form-select'}),
+            'has_siblings_in_school': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
     def clean(self):

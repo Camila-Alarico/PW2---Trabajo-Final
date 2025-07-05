@@ -6,7 +6,24 @@
 <h2>{{ form.instance.pk|yesno:"Editar Postulante,Nuevo Postulante" }}</h2>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  <div class="mb-3">
+    {{ form.full_name.label_tag }} {{ form.full_name }}
+  </div>
+  <div class="mb-3">
+    {{ form.dni.label_tag }} {{ form.dni }}
+  </div>
+  <div class="mb-3">
+    {{ form.birth_date.label_tag }} {{ form.birth_date }}
+  </div>
+  <div class="mb-3">
+    {{ form.grade_applied.label_tag }} {{ form.grade_applied }}
+  </div>
+  <div class="mb-3 form-check">
+    {{ form.has_siblings_in_school }} {{ form.has_siblings_in_school.label_tag }}
+  </div>
+  <div class="mb-3">
+    {{ form.parent.label_tag }} {{ form.parent }}
+  </div>
   <button type="submit" class="btn btn-success">Guardar</button>
   <a href="{% url 'applicant_list' %}" class="btn btn-secondary">Cancelar</a>
 </form>

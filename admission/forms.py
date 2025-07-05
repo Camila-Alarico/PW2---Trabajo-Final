@@ -11,6 +11,11 @@ class ParentForm(forms.ModelForm):
             'dni': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'occupation': forms.TextInput(attrs={'class': 'form-control'}),
+            'education_level': forms.Select(attrs={'class': 'form-select'}),
+            'marital_status': forms.Select(attrs={'class': 'form-select'}),
+            'has_university_affiliation': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
 class ApplicantForm(forms.ModelForm):

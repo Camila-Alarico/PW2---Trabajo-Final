@@ -1,13 +1,46 @@
 from django.db import models
 
+from django.db import models
+
 class Parent(models.Model):
-    full_name = models.CharField(max_length=100)
-    dni = models.CharField(max_length=10, unique=True)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
+    full_name = models.CharField("Nombre completo", max_length=100)
+    dni = models.CharField("DNI", max_length=10, unique=True)
+    email = models.EmailField("Correo electrónico")
+    phone = models.CharField("Teléfono", max_length=15)
+    address = models.CharField("Dirección", max_length=200, blank=True)
+    occupation = models.CharField("Ocupación", max_length=100, blank=True)
+    education_level = models.CharField(
+        "Nivel educativo",
+        max_length=50,
+        choices=[
+            ('Primaria', 'Primaria'),
+            ('Secundaria', 'Secundaria'),
+            ('Técnico', 'Técnico'),
+            ('Universitario', 'Universitario'),
+            ('Posgrado', 'Posgrado'),
+        ],
+        blank=True
+    )
+    marital_status = models.CharField(
+        "Estado civil",
+        max_length=20,
+        choices=[
+            ('Soltero/a', 'Soltero/a'),
+            ('Casado/a', 'Casado/a'),
+            ('Divorciado/a', 'Divorciado/a'),
+            ('Viudo/a', 'Viudo/a'),
+            ('Conviviente', 'Conviviente'),
+        ],
+        blank=True
+    )
+    has_university_affiliation = models.BooleanField(
+        "¿Tiene vínculo con la universidad?",
+        default=False
+    )
 
     def __str__(self):
         return self.full_name
+
 
 class Applicant(models.Model):
     GRADE_CHOICES = [

@@ -21,10 +21,32 @@
   <div class="mb-3 form-check">
     {{ form.has_siblings_in_school }} {{ form.has_siblings_in_school.label_tag }}
   </div>
+  <div class="mb-3" id="siblings-section">
+    {{ form.siblings.label_tag }} {{ form.siblings }}
+  </div>
   <div class="mb-3">
     {{ form.parent.label_tag }} {{ form.parent }}
   </div>
   <button type="submit" class="btn btn-success">Guardar</button>
   <a href="{% url 'applicant_list' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+<script>
+  //Este script maneja la visibilidad del campo de hermanos, se podria mover a otro archivo JS si se desea
+  document.addEventListener('DOMContentLoaded', function () {
+    const hasSiblingsCheckbox = document.querySelector('input[name="has_siblings_in_school"]');
+    const siblingsSection = document.getElementById('siblings-section');
+
+    function toggleSiblings() {
+      if (hasSiblingsCheckbox.checked) {
+        siblingsSection.style.display = 'block';
+      } else {
+        siblingsSection.style.display = 'none';
+      }
+    }
+
+    hasSiblingsCheckbox.addEventListener('change', toggleSiblings);
+    toggleSiblings();
+  });
+</script>
+
 {% endblock %}

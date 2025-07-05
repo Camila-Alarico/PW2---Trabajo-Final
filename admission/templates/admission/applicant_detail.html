@@ -9,5 +9,22 @@
   <li class="list-group-item"><strong>Fecha de Nacimiento:</strong> {{ applicant.birth_date }}</li>
   <li class="list-group-item"><strong>Aula:</strong> {{ applicant.grade_applied }}</li>
   <li class="list-group-item"><strong>Apoderado:</strong> {{ applicant.parent }}</li>
-  <li class="list-group-item"><strong>Tiene Hermanos en IEI:</strong> {{ applicant.has_siblings_in_school|yesno:"Sí,No" }}</li>
+  <li class="list-group-item">
+    <strong>Tiene Hermanos en IEI:</strong> {{ applicant.has_siblings_in_school|yesno:"Sí,No" }}
+  </li>
+  {% if applicant.has_siblings_in_school %}
+  <li class="list-group-item">
+    <strong>Hermanos:</strong>
+    {% if applicant.siblings.all %}
+    {% for sibling in applicant.siblings.all %}
+    {{ sibling.full_name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    {% else %}
+    Ninguno seleccionado
+    {% endif %}
+  </li>
+  {% endif %}
 </ul>
+<a href="{% url 'applicant_update' applicant.pk %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'applicant_list' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}

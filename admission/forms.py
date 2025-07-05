@@ -24,7 +24,9 @@ class ApplicantForm(forms.ModelForm):
             'dni': forms.TextInput(attrs={'class': 'form-control'}),
             'parent': forms.Select(attrs={'class': 'form-select'}),
             'has_siblings_in_school': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'siblings': forms.SelectMultiple(attrs={'class': 'form-select'}),
         }
+
 
     def clean(self):
         cleaned_data = super().clean()

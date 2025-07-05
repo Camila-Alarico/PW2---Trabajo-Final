@@ -21,12 +21,14 @@ class Applicant(models.Model):
     birth_date = models.DateField()
     grade_applied = models.CharField(max_length=10, choices=GRADE_CHOICES)
     dni = models.CharField(max_length=10, unique=True)
-    parent = models.ForeignKey(Parent, on_delete=models.CASCADE, related_name='children')
+    parent = models.ForeignKey('Parent', on_delete=models.CASCADE, related_name='children')
     has_siblings_in_school = models.BooleanField(default=False)
+    siblings = models.ManyToManyField('self', blank=True, symmetrical=True)
 
     def __str__(self):
         return f"{self.full_name} - {self.grade_applied}"
-        
+
+
 class Payment(models.Model):
     BANK_CHOICES = [
         ('Banco de la Nación', 'Banco de la Nación'),

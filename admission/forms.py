@@ -16,6 +16,9 @@ class ParentForm(forms.ModelForm):
             'education_level': forms.Select(attrs={'class': 'form-select'}),
             'marital_status': forms.Select(attrs={'class': 'form-select'}),
             'has_university_affiliation': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'university_role': forms.TextInput(attrs={'class': 'form-control'}),
+            'university_area': forms.TextInput(attrs={'class': 'form-control'}),
+            'university_relationship_details': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
 class ApplicantForm(forms.ModelForm):

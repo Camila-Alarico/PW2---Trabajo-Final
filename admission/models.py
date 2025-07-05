@@ -37,6 +37,20 @@ class Parent(models.Model):
         "¿Tiene vínculo con la universidad?",
         default=False
     )
+    university_role = models.CharField(
+        "Cargo en la universidad",
+        max_length=100,
+        blank=True
+    )
+    university_area = models.CharField(
+        "Área o dependencia",
+        max_length=100,
+        blank=True
+    )
+    university_relationship_details = models.TextField(
+        "Detalles del vínculo",
+        blank=True
+    )
 
     def __str__(self):
         return self.full_name

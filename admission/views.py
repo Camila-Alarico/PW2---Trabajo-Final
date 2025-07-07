@@ -99,7 +99,6 @@ def home(request):
     return render(request, 'admission/home.html')
 
 @csrf_exempt
-@csrf_exempt
 def send_parents_email(request):
     if request.method == 'POST':
         sender = request.POST.get('sender')
@@ -130,4 +129,32 @@ def send_parents_email(request):
 
         email.send()
         return HttpResponse('Correo enviado con éxito')
+    return HttpResponse('Método no permitido', status=405)
+
+def send_applicants_email(request):
+    if request.method == 'POST':
+        recipient = request.POST.get('recipient')
+        message = request.POST.get('message')
+        pdf = request.FILES.get('pdf')
+        extra_file = request.FILES.get('extra_file')
+
+        if not recipient or not pdf:
+            return HttpResponse('Faltan datos', status=400)
+
+        fixed_sender = 'tu_correo_fijo@gmail.com'  # Reemplaza con el real
+
+        email = EmailMessage(
+            'Lista de Postulantes',
+            message,
+            fixed_sender,
+            [recipient],
+        )
+        email.attach(pdf.name, pdf.read(), 'application/pdf')
+
+        if extra_file:
+            email.attach(extra_file.name, extra_file.read(), extra_file.content_type)
+
+        email.send()
+        return HttpResponse('Correo enviado con éxito')
+
     return HttpResponse('Método no permitido', status=405)

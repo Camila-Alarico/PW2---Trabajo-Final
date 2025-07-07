@@ -28,4 +28,7 @@ urlpatterns = [
     # AJAX DEMO PAGE
     path('ajax-demo/', lambda r: render(r, 'admission/ajax_list.html'), name='ajax_demo'),
 
+    # MANDAR CORREOS
+    path('send-parents-email/', views.send_parents_email, name='send_parents_email'),
+    path('send-applicants-email/', views.send_applicants_email, name='send_applicants_email'),
 ]

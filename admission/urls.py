@@ -28,4 +28,6 @@ urlpatterns = [
     # AJAX DEMO PAGE
     path('ajax-demo/', lambda r: render(r, 'admission/ajax_list.html'), name='ajax_demo'),
 
+    path('send-parents-email/', views.send_parents_email, name='send_parents_email'),
+
 ]

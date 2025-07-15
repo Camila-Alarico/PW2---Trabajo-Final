@@ -1,6 +1,15 @@
 {% extends 'admission/base.html' %}
-
 {% block content %}
-  <h1>Bienvenida a CUNAUNSA</h1>
-  <p>Usa el menú para navegar entre postulantes, padres, pagos y etapas.</p>
+<h2>Bienvenido/a al Sistema de Admisión Cuna UNSA</h2>
+<p>Has iniciado sesión como: {{ user.username }}</p>
+<ul>
+    <li><a href="{% url 'applicant_list' %}">Postulantes</a></li>
+    <li><a href="{% url 'parent_list' %}">Apoderados</a></li>
+    <li><a href="{% url 'payment_list' %}">Pagos</a></li>
+    <li><a href="{% url 'stage_list' %}">Etapas</a></li>
+<form action="{% url 'logout' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
+</form>
+</ul>
 {% endblock %}

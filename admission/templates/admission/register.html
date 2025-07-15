@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro – CUNA UNSA</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #7B61FF, #60A9FF);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 380px;
+            text-align: center;
+        }
+
+        .register-container h1 {
+            margin-bottom: 0.2rem;
+            color: #2c3e50;
+        }
+
+        .register-container h2 {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 10px;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 10px;
+            background: #4C6EF5;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-register:hover {
+            background: #3B5BDB;
+        }
+
+        .login-link {
+            margin-top: 1.5rem;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #4C6EF5;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: #4C6EF5;
+            margin-bottom: 1rem;
+        }
+
+        .form-errors {
+            color: red;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="icon">📘</div>
+        <h1>CUNA UNSA</h1>
+        <h2>Registro de Usuario</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div class="form-errors">{{ field.errors|join:", " }}</div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn-register">Registrar</button>
+        </form>
+
+        <div class="login-link">
+            ¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a>
+        </div>
+    </div>
+</body>
+</html>

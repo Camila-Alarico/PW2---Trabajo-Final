@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión – CUNA UNSA</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #7B61FF, #60A9FF);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 0.2rem;
+            color: #2c3e50;
+        }
+
+        .login-container h2 {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 10px;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background: #4C6EF5;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            background: #3B5BDB;
+        }
+
+        .register-link {
+            margin-top: 1.5rem;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: #4C6EF5;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: #4C6EF5;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="icon">📘</div>
+        <h1>CUNA UNSA</h1>
+        <h2>Iniciar Sesión</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.email.label_tag }}
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+
+            {{ form.password.label_tag }}
+            <input type="password" name="password" placeholder="Password" required>
+
+            <button type="submit" class="btn-login">Sign In</button>
+        </form>
+
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="{% url 'register' %}">Registrarse</a>
+        </div>
+    </div>
+</body>
+</html>

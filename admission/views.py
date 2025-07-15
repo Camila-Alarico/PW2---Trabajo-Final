@@ -7,12 +7,17 @@ from .models import Parent, Payment, AdmissionStage
 from .forms import ParentForm, PaymentForm, AdmissionStageForm
 from django.http import JsonResponse
 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 import io
 
-
+@method_decorator(login_required, name='dispatch')
 # LISTADO
 class ApplicantListView(ListView):
     model = Applicant
@@ -158,3 +163,19 @@ def send_applicants_email(request):
         return HttpResponse('Correo enviado con éxito')
 
     return HttpResponse('Método no permitido', status=405)
+
+@login_required
+def home_view(request):
+    return render(request, 'admission/home.html')
+
+# Vista de registro
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'admission/register.html', {'form': form})

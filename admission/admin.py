@@ -1,3 +1,7 @@
 from django.contrib import admin
+from admission.models import Parent, Applicant, Payment, AdmissionStage
 
-# Register your models here.
+admin.site.register(Parent)
+admin.site.register(Applicant)
+admin.site.register(Payment)
+admin.site.register(AdmissionStage)

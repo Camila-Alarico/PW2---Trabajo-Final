@@ -1,0 +1,27 @@
+/* Círculo de fondo para los íconos */
+.custom-service-icon {
+  color: #d72638; /* rojo coral */
+}
+
+/* Íconos blancos centrados correctamente */
+.fa-stack-1x {
+  font-size: 1.4rem;
+  transform: translateX(17px);
+}
+
+/* Mover los íconos un poco a la derecha */
+
+
+/* Títulos y texto */
+.section-heading {
+  color: #b3001b;
+}
+
+.section-subheading {
+  color: #6c757d;
+}
+
+/* Ajuste general si deseas más espacio entre ítems */
+#services .col-md-4 {
+  margin-bottom: 2rem;
+}

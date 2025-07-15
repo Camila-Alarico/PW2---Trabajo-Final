@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-contact',
   imports: [],
-  templateUrl: './contact.html',
-  styleUrl: './contact.css'
+  templateUrl: './login.html',
+  styleUrl: './login.css'
 })
 export class Contact {
 

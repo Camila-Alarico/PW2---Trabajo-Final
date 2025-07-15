@@ -10953,6 +10953,38 @@ header.masthead {
   background-position: center center;
   background-size: cover;
 }
+header.masthead {
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  color: #fff;
+  background-image: url("../img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* Filtro oscuro encima del fondo */
+header.masthead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.45); /* puedes ajustar la opacidad */
+  z-index: 0;
+}
+
+/* Asegura que el contenido esté encima del filtro */
+header.masthead .container {
+  position: relative;
+  z-index: 1;
+}
+
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;

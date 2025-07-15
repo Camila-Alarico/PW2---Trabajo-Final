@@ -3,7 +3,7 @@ import { Home } from './pages/home/home';
 import { AboutUs } from './pages/about-us/about-us';
 import { Admissions } from './pages/admissions/admissions';
 import { Gallery } from './pages/gallery/gallery';
-import { Contact } from './pages/contact/contact';
+import { Contact } from './pages/login/login';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -11,5 +11,5 @@ export const routes: Routes = [
   { path: 'about-us', component: AboutUs },
   { path: 'admissions', component: Admissions },
   { path: 'gallery', component: Gallery },
-  { path: 'contact', component: Contact },
+  { path: 'login', component: Contact },
 ];

@@ -1,0 +1,39 @@
+.section-heading {
+  color: #e63946; /* Rojo coral */
+  font-weight: bold;
+}
+
+.subheading {
+  color: #e63946;
+}
+
+.timeline-panel {
+  border-left: 4px solid #e63946;
+  padding-left: 20px;
+}
+
+.timeline-image h4 {
+  color: #caccca;
+  font-weight: 600;
+  text-align: center;
+}
+
+.timeline-image img {
+  border: 4px solid #e63946;
+}
+
+.timeline li:last-child .timeline-image {
+  background-color: #d72638; /* rojo coral */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.timeline li:last-child .timeline-image h4 {
+  margin: 0;
+  line-height: 1.5;
+}
+

@@ -1,0 +1,25 @@
+.masthead-subheading {
+  font-size: 1.5rem;
+  color: #f8f9fa;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.masthead-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+
+
+.btn-primary {
+  background-color: #e63946;
+  border-color: #e63946;
+}
+
+.btn-primary:hover {
+  background-color: #d62828;
+  border-color: #d62828;
+}

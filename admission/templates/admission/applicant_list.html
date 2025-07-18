@@ -5,7 +5,6 @@
 {% block content %}
 <h2>Lista de Postulantes</h2>
 <a href="{% url 'applicant_create' %}" class="btn btn-primary mb-3">Nuevo Postulante</a>
-
 <table class="table table-bordered table-hover">
   <thead class="table-dark">
     <tr>
@@ -33,92 +32,30 @@
   </tbody>
 </table>
 
-<!-- Sección Exportar y Enviar PDF -->
 <div class="mt-4">
-  <h5>📄 Exportar y ✉️ Enviar PDF</h5>
-
-  <button id="btn-pdf-download" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
-
-  <div class="form-group">
-    <label>Correo destino:</label>
-    <input type="email" id="recipient" class="form-control mb-2" placeholder="ej. destino@email.com">
-  </div>
-  <div class="form-group">
-    <label>Mensaje:</label>
-    <textarea id="message" class="form-control mb-2" rows="3" placeholder="Tu mensaje aquí..."></textarea>
-  </div>
-  <div class="form-group">
-    <label>Archivo adicional (opcional):</label>
-    <input type="file" id="extra-file" class="form-control mb-2">
-  </div>
-  <button id="btn-email-applicants" class="btn btn-outline-success">✉️ Enviar PDF</button>
+  <h5>Exportar Postulantes</h5>
+  <button id="btn-pdf-applicants" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button id="btn-email-applicants" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
   <div id="status-applicants" class="mt-2 text-muted"></div>
 </div>
 
-<!-- Contenido oculto para generar PDF -->
-<div id="pdf-content" style="display: none;">
-  <h2 style="text-align: center;">Lista de Postulantes</h2>
-  <table border="1" cellspacing="0" cellpadding="5" width="100%">
-    <thead style="background-color: #f0f0f0;">
-      <tr>
-        <th>Nombre</th>
-        <th>Aula</th>
-        <th>DNI</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for applicant in applicants %}
-      <tr>
-        <td>{{ applicant.full_name }}</td>
-        <td>{{ applicant.grade_applied }}</td>
-        <td>{{ applicant.dni }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
-<!-- Script PDF + Envío -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-  // Descargar PDF
-  document.getElementById('btn-pdf-download').addEventListener('click', function () {
-    const element = document.getElementById('pdf-content');
-    element.style.display = 'block';
-    html2pdf().from(element).save('postulantes.pdf');
-    setTimeout(() => element.style.display = 'none', 1000);
+  document.getElementById('btn-pdf-applicants').addEventListener('click', function () {
+    fetch('/applicants/pdf/')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'postulantes.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
   });
 
-  // Enviar PDF por correo
   document.getElementById('btn-email-applicants').addEventListener('click', function () {
-    const recipient = document.getElementById('recipient').value;
-    const message = document.getElementById('message').value;
-    const extraFile = document.getElementById('extra-file').files[0];
-
-    if (!recipient) {
-      alert("Por favor ingresa el correo destino.");
-      return;
-    }
-
-    const element = document.getElementById('pdf-content');
-    element.style.display = 'block';
-
-    html2pdf().from(element).outputPdf('blob').then(function (pdfBlob) {
-      const formData = new FormData();
-      formData.append('recipient', recipient);
-      formData.append('message', message);
-      formData.append('pdf', pdfBlob, 'postulantes.pdf');
-      if (extraFile) {
-        formData.append('extra_file', extraFile);
-      }
-
-      fetch('/send-applicants-email/', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRFToken': '{{ csrf_token }}'
-        }
-      })
+    fetch('/send-applicants-email/')
       .then(response => response.text())
       .then(data => {
         document.getElementById('status-applicants').innerText = '✅ Correo enviado con éxito';
@@ -127,9 +64,6 @@
         document.getElementById('status-applicants').innerText = '❌ Error al enviar el correo';
         console.error(error);
       });
-
-      setTimeout(() => element.style.display = 'none', 1000);
-    });
   });
 </script>
 {% endblock %}

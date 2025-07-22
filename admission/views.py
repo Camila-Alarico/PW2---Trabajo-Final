@@ -83,11 +83,34 @@ class PaymentCreateView(CreateView):
     template_name = 'admission/payment_form.html'
     success_url = reverse_lazy('payment_list')
 
+class PaymentUpdateView(UpdateView):
+    model = Payment
+    form_class = PaymentForm
+    template_name = 'admission/payment_form.html'
+    success_url = reverse_lazy('payment_list')
+
+class PaymentDeleteView(DeleteView):
+    model = Payment
+    template_name = 'admission/payment_confirm_delete.html'
+    success_url = reverse_lazy('payment_list')
+
 # ADMISSION STAGE (Etapas)
 class AdmissionStageListView(ListView):
     model = AdmissionStage
     template_name = 'admission/stage_list.html'
     context_object_name = 'stages'
+
+class AdmissionStageUpdateView(UpdateView):
+    model = AdmissionStage
+    form_class = AdmissionStageForm
+    template_name = 'admission/stage_form.html'
+    success_url = reverse_lazy('stage_list')
+
+class AdmissionStageDeleteView(DeleteView):
+    model = AdmissionStage
+    template_name = 'admission/stage_confirm_delete.html'
+    success_url = reverse_lazy('stage_list')
+
 
 class AdmissionStageCreateView(CreateView):
     model = AdmissionStage

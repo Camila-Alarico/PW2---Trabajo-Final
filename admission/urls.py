@@ -17,10 +17,14 @@ urlpatterns = [
     # PAGOS
     path('payments/', views.PaymentListView.as_view(), name='payment_list'),
     path('payments/create/', views.PaymentCreateView.as_view(), name='payment_create'),
+    path('payments/<int:pk>/edit/', views.PaymentUpdateView.as_view(), name='payment_update'),
+    path('payments/<int:pk>/delete/', views.PaymentDeleteView.as_view(), name='payment_delete'),
 
     # ETAPAS
     path('stages/', views.AdmissionStageListView.as_view(), name='stage_list'),
     path('stages/create/', views.AdmissionStageCreateView.as_view(), name='stage_create'),
+    path('stages/<int:pk>/edit/', views.AdmissionStageUpdateView.as_view(), name='stage_update'),
+    path('stages/<int:pk>/delete/', views.AdmissionStageDeleteView.as_view(), name='stage_delete'),
 
     # API JSON
     path('api/applicants/', views.applicant_json_api, name='applicant_json_api'),

@@ -6,7 +6,7 @@
 <table class="table table-bordered table-striped">
   <thead class="table-dark">
     <tr>
-      <th>Postulante</th><th>Etapa</th><th>Fecha</th><th>Completado</th>
+      <th>Postulante</th><th>Etapa</th><th>Fecha</th><th>Completado</th><th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +16,10 @@
       <td>{{ stage.stage }}</td>
       <td>{{ stage.date }}</td>
       <td>{% if stage.completed %}✔{% else %}✖{% endif %}</td>
+      <td>
+        <a href="{% url 'stage_update' stage.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+        <a href="{% url 'stage_delete' stage.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+      </td>
     </tr>
     {% empty %}
     <tr><td colspan="4">No hay etapas registradas.</td></tr>

@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "admission",
+    'rest_framework', 
+    'rest_framework_simplejwt'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -129,3 +137,6 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 
 CORS_ALLOW_ALL_ORIGINS = True  # Para desarrollo, restringe en producción
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]

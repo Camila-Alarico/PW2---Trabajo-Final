@@ -6,7 +6,7 @@
 
     <ul *ngIf="applicants.length > 0" class="list-group">
       <li *ngFor="let student of applicants" class="list-group-item">
-        <strong>{{ student.nombre }}</strong> — {{ student.dni }} — {{ student.programa }}
+        <strong>{{ student.full_name }}</strong> — {{ student.dni }} — {{ student.grade_applied }}
       </li>
     </ul>
   </section>

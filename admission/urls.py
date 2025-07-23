@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.shortcuts import render
 
@@ -31,4 +31,6 @@ urlpatterns = [
     # MANDAR CORREOS
     path('send-parents-email/', views.send_parents_email, name='send_parents_email'),
     path('send-applicants-email/', views.send_applicants_email, name='send_applicants_email'),
+    
+    path('api/applicants/', views.ApplicantListViewAngular.as_view(), name='applicant-list'),
 ]

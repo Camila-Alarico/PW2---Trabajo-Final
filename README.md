@@ -44,9 +44,14 @@ El sistema es escalable y permite la incorporación de nuevas funcionalidades a 
 
 ## Modelo de Datos
 
-- Explica las entidades y relaciones.
-- Incluye **una imagen del diagrama ER o UML** (puede estar en `/docs/modelo.png` o generado con dbdiagram.io).
-  
+modelo entidad-relación del sistema:
+
+![Modelo de Datos](docs/modelo_datos.png)
+
+- Un `Parent` puede tener muchos `Applicant` (hijos).
+- Cada `Applicant` puede tener múltiples `Payments` y `AdmissionStages`.
+- La relación entre hermanos se representa al compartir el mismo `parent_id`.
+    
 ```mermaid
 classDiagram
     Usuario <|-- Admin

@@ -1,3 +1,72 @@
+# Cuna UNSA
+
+## Descripción General
+Este proyecto consiste en el desarrollo de una aplicación web para optimizar el proceso de admisión del Cuna-Jardín de la Universidad Nacional de San Agustín (UNSA). La plataforma permite registrar y gestionar postulantes, padres de familia, etapas del proceso y pagos, todo desde un panel administrativo seguro y fácil de usar.
+
+El sistema se compone de:
+- Un Backend en Django, encargado de la lógica del sistema, la gestión de datos y la API REST.
+- Un Frontend en Angular, que presenta información institucional de forma dinámica y atractiva para los usuarios.
+- Entre las principales funcionalidades se incluyen:
+- Vistas CRUD completas (crear, listar, actualizar y eliminar).
+- Consultas en formato JSON y operaciones asíncronas con AJAX y JavaScript.
+- Inicio de sesión seguro para administradores.
+- Generación de informes en PDF y envío de correos electrónicos.
+- Diseño adaptable con Angular y uso de plantillas para una experiencia de usuario moderna.
+
+El sistema es escalable y permite la incorporación de nuevas funcionalidades a futuro, alineándose con los objetivos de digitalización y mejora continua de la UNSA.
+
+## Tabla de Contenidos
+- [Descripción General](#descripción-general)
+- [URLs](#urls)
+- [Modelo de Datos](#modelo-de-datos)
+- [Backend](#backend)
+- [API REST](#api-rest)
+- [Frontend](#frontend)
+- [AJAX](#ajax)
+- [Capturas de Pantalla](#capturas-de-pantalla)
+- [Recomendaciones](#recomendaciones)
+- [Conclusiones](#conclusiones)
+- [Referencias](#referencias)
+
+---
+
+## URLs
+
+- 🔗 Repositorio Backend: [GitHub Backend](https://github.com/usuario/proyecto-backend)
+- 🔗 Repositorio Frontend: [GitHub Frontend](https://github.com/usuario/proyecto-frontend)
+  - o bien: [GitHub Único con carpetas BACKEND y FRONTEND](https://github.com/usuario/proyecto)
+- 🌐 URL del sitio desplegado con dominio HTTPS: [https://www.miappweb.com](https://www.miappweb.com)
+  - **Usuario para probar**: `admin`  
+  - **Contraseña**: `admin123`
+  - Base de datos con registros listos para probar CRUDs.
+
+---
+
+## Modelo de Datos
+
+- Explica las entidades y relaciones.
+- Incluye **una imagen del diagrama ER o UML** (puede estar en `/docs/modelo.png` o generado con dbdiagram.io).
+  
+```mermaid
+classDiagram
+    Usuario <|-- Admin
+    Usuario <|-- Cliente
+    Producto *-- Categoria
+    Pedido o-- Cliente## Modelo de Datos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 " https://www.unsa.edu.pe/proceso-de-admision-cuna-jardin-unsa-2024/
 
 Proceso de admision cuna-jardin unsa 

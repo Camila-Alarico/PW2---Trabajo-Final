@@ -17,6 +17,15 @@ from django.core.mail import EmailMessage
 from django.http import HttpResponse
 import io
 
+from rest_framework.generics import ListAPIView
+from .models import Applicant
+from .serializers import ApplicantSerializer
+from django.http import JsonResponse
+
+class ApplicantListViewAngular(ListAPIView):
+    queryset = Applicant.objects.all()
+    serializer_class = ApplicantSerializer
+    
 @method_decorator(login_required, name='dispatch')
 # LISTADO
 class ApplicantListView(ListView):

@@ -21,6 +21,11 @@ from rest_framework.generics import ListAPIView
 from .models import Applicant
 from .serializers import ApplicantSerializer
 from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.shortcuts import render, redirect
 
 class ApplicantListViewAngular(ListAPIView):
     queryset = Applicant.objects.all()
@@ -133,7 +138,13 @@ def applicant_json_api(request):
 
 # Poner base en la pagina principal
 def home(request):
-    return render(request, 'admission/home.html')
+    # Intenta autenticar por JWT
+    user_auth_tuple = JWTAuthentication().authenticate(request)
+    if user_auth_tuple is None:
+        # Si no hay JWT válido, redirige al login tradicional
+        return redirect('/login/')
+    request.user = user_auth_tuple[0]
+    return render(request, 'admission/home.html', {'user': request.user})
 
 @csrf_exempt
 def send_parents_email(request):
@@ -211,3 +222,16 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'admission/register.html', {'form': form})
+
+class HomeAdminView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"message": f"Bienvenido/a {request.user.username}"})
+
+def admin_panel(request):
+    user_auth_tuple = JWTAuthentication().authenticate(request)
+    if user_auth_tuple is None:
+        return redirect('/login/')
+    request.user = user_auth_tuple[0]
+    return render(request, 'admission/home.html', {'user': request.user})

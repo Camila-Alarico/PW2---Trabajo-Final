@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from django.shortcuts import render
+from .views import admin_panel
 
 urlpatterns = [
     path('applicants/', views.ApplicantListView.as_view(), name='applicant_list'),
@@ -37,4 +38,7 @@ urlpatterns = [
     path('send-applicants-email/', views.send_applicants_email, name='send_applicants_email'),
     
     path('api/applicants/', views.ApplicantListViewAngular.as_view(), name='applicant-list'),
+
+    # ADMIN PANEL
+    path('admin-panel/', admin_panel, name='admin_panel'),
 ]

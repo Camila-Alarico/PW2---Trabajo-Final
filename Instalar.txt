@@ -1,0 +1,10 @@
+Instalar en env
+pip install django djangorestframework
+pip install djangorestframework djangorestframework-simplejwt
+pip install django-cors-headers
+
+Usuario y contraseña para poner al login
+nc
+
+Para entrar a Django
+python manage.py runserver 8001

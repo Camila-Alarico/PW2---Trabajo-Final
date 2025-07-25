@@ -1,0 +1,17 @@
+section#contact {
+    background-color: #1a191e;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#submitButton {
+    background-color: #e63946 !important;
+    border-color: #e63946 !important;
+    color: white !important;
+}
+
+#submitButton:hover {
+    background-color: #c72f3b !important;
+    border-color: #c72f3b !important;
+}

@@ -6,3 +6,6 @@
 .navbar-nav .nav-link.active {
   color: #d62839 !important; /* Coral más intenso al hacer hover o estar activo */
 }
+.navbar-nav .nav-link {
+    font-weight: 600 !important;
+}

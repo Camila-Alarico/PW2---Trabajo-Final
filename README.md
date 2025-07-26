@@ -39,7 +39,6 @@ Entre las principales funcionalidades se incluyen:
 - 🌐 URL del sitio desplegado con dominio HTTPS: [https://www.miappweb.com](https://www.miappweb.com)
   - **Usuario para probar**: `admin`  
   - **Contraseña**: `admin123`
-  - Base de datos con registros listos para probar CRUDs.
 
 ---
 
@@ -74,10 +73,16 @@ Relaciones:
     
 ## Instrucciones de instalación local
 
-Sistema de inicio de sesión solo para el área administrativa:  
-🔸 Validación de credenciales  
-🔸 Redirección al panel  
-🔸 Protección de rutas
+Para Django (donde este env): 
+- .\env\Scripts\Activate.ps1
+- pip install django
+- pip install django djangorestframework
+- pip install djangorestframework djangorestframework-simplejwt
+- pip install django-cors-headers
+
+Para Angular (donde este angular.json):
+- npm install
+- ng serve
 
 
 ---
@@ -85,11 +90,15 @@ Sistema de inicio de sesión solo para el área administrativa:
 ## Backend
 
 Se implementaron vistas de:
-- Listado ✅
-- Detalle ✅
-- Crear ✅
-- Actualizar ✅
-- Eliminar ✅
+- Listado
+   
+- Detalle
+  
+- Crear
+  
+- Actualizar
+  
+- Eliminar 
 
 **Captura de pantalla:**
 
@@ -113,19 +122,25 @@ Se implementaron vistas de:
 
 ## AJAX
 
-### Vista que devuelve JSON desde Django:
-
 
 
 ---
 
 ## Recomendaciones
-
+- Optimizar el rendimiento del sistema utilizando una base de datos y configuraciones avanzadas.
+- Dividir el frontend Angular en módulos para poder ver todas las paginas (postulantes, padres, pagos) para facilitar el mantenimiento y escalabilidad del código.
+- Implementar control de acceso basado en roles para separar permisos entre administradores y personal de apoyo.
+- Realizar mejoras en la experiencia de usuario y accesibilidad para facilitar su uso por parte del personal educativo.
+- Mejorar la interfaz del proyecto para mas comodidad visual.
 
 ---
 
 ## Conclusiones
-
+- El desarrollo de Cuna UNSA permitió implementar una aplicación web funcional y automatizada para el proceso de admisión del Cuna-Jardín UNSA, facilitando la gestión de postulantes, padres, etapas y pagos.
+- Se logró integrar correctamente el backend desarrollado en Django con el frontend en Angular, implementando un sistema modular y escalable.
+- La creación de vistas CRUD, formularios con validaciones, y el uso de AJAX fueron usados para desarrollar este proyecto.
+- El proyecto permitió afianzar conocimientos técnicos en Django y Angular.
+- El sistema queda listo para futuras ampliaciones.
 
 
 

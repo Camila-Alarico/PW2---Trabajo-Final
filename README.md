@@ -1,40 +1,41 @@
 # Cuna UNSA
 
+> Proyecto web desarrollado como parte del curso [Programacion Web]  
+> 🏫 Universidad Nacional de San Agustín  
+> 👩‍💻 Integrantes: Camila Alarico, Laura Vilca, Elkin Ramos, Cristhian Bravo  
+> 👨‍🏫 Docente: Carlo Corrales Delgado
+
 ## Descripción General
 Este proyecto consiste en el desarrollo de una aplicación web para optimizar el proceso de admisión del Cuna-Jardín de la Universidad Nacional de San Agustín (UNSA). La plataforma permite registrar y gestionar postulantes, padres de familia, etapas del proceso y pagos, todo desde un panel administrativo seguro y fácil de usar.
 
 El sistema se compone de:
-- Un Backend en Django, encargado de la lógica del sistema, la gestión de datos y la API REST.
+- Un Backend en Django, encargado de la lógica del sistema y la gestión de datos.
 - Un Frontend en Angular, que presenta información institucional de forma dinámica y atractiva para los usuarios.
-- Entre las principales funcionalidades se incluyen:
-- Vistas CRUD completas (crear, listar, actualizar y eliminar).
-- Consultas en formato JSON y operaciones asíncronas con AJAX y JavaScript.
-- Inicio de sesión seguro para administradores.
-- Generación de informes en PDF y envío de correos electrónicos.
-- Diseño adaptable con Angular y uso de plantillas para una experiencia de usuario moderna.
 
-El sistema es escalable y permite la incorporación de nuevas funcionalidades a futuro, alineándose con los objetivos de digitalización y mejora continua de la UNSA.
+Entre las principales funcionalidades se incluyen:
+- Vistas como crear, listar, actualizar y eliminar.
+- Inicio de sesión seguro para administradores.
+- Generación de informes en PDF.
+- Diseño adaptable con Angular y uso de plantillas para una experiencia de usuario moderna.
 
 ## Tabla de Contenidos
 - [Descripción General](#descripción-general)
 - [URLs](#urls)
+- [Tecnologias Usadas](#tecnologias_usadas)
 - [Modelo de Datos](#modelo-de-datos)
+- [Instrucciones de instalación local](#instrucciones)
 - [Backend](#backend)
-- [API REST](#api-rest)
-- [Frontend](#frontend)
+- [FrontEnd](#frontend)
 - [AJAX](#ajax)
 - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Recomendaciones](#recomendaciones)
 - [Conclusiones](#conclusiones)
-- [Referencias](#referencias)
 
 ---
 
 ## URLs
 
-- 🔗 Repositorio Backend: [GitHub Backend](https://github.com/usuario/proyecto-backend)
-- 🔗 Repositorio Frontend: [GitHub Frontend](https://github.com/usuario/proyecto-frontend)
-  - o bien: [GitHub Único con carpetas BACKEND y FRONTEND](https://github.com/usuario/proyecto)
+- 🔗 Repositorio: [GitHub Backend]([https://github.com/usuario/proyecto-backend](https://github.com/Camila-Alarico/PW2---Trabajo-Final.git))
 - 🌐 URL del sitio desplegado con dominio HTTPS: [https://www.miappweb.com](https://www.miappweb.com)
   - **Usuario para probar**: `admin`  
   - **Contraseña**: `admin123`
@@ -42,30 +43,88 @@ El sistema es escalable y permite la incorporación de nuevas funcionalidades a 
 
 ---
 
+## Tecnologias Usadas
+- **Frontend:** Angular, CSS, HTML5
+- **Backend:** Django
+- **AJAX:** JavaScript, Fetch API
+- **Base de Datos:** SQLite
+- **PDFs:** html2pdf.js
+
+---
+
 ## Modelo de Datos
 
 modelo entidad-relación del sistema:
 
-![Modelo de Datos](docs/modelo_datos.png)
+![Modelo de Datos](docs/modelo_datos.PNG)
+> Diagrama creado con [dbdiagram.io](https://dbdiagram.io)
 
-- Un `Parent` puede tener muchos `Applicant` (hijos).
-- Cada `Applicant` puede tener múltiples `Payments` y `AdmissionStages`.
-- La relación entre hermanos se representa al compartir el mismo `parent_id`.
+Usamos varios modelos relacionados:
+
+- `Postulante`
+- `Padre`
+- `Etapa`
+- `Pago`
+
+Relaciones:
+- Un `Padre` puede tener varios `Postulantes` (ForeignKey)
+- Un `Postulante` pertenece a una `Etapa`
+
+---
     
-```mermaid
-classDiagram
-    Usuario <|-- Admin
-    Usuario <|-- Cliente
-    Producto *-- Categoria
-    Pedido o-- Cliente## Modelo de Datos
+## Instrucciones de instalación local
+
+Sistema de inicio de sesión solo para el área administrativa:  
+🔸 Validación de credenciales  
+🔸 Redirección al panel  
+🔸 Protección de rutas
+
+
+---
+
+## Backend
+
+Se implementaron vistas de:
+- Listado ✅
+- Detalle ✅
+- Crear ✅
+- Actualizar ✅
+- Eliminar ✅
+
+**Captura de pantalla:**
+
+📸 ![CRUD](docs/img/crud_listado.png)
+
+📸 ![Formulario](docs/img/formulario_crear.png)
+
+> 💡 Puedes agregar más capturas en `/docs/img/` y linkearlas aquí.
+
+---
+
+## FrontEnd
+
+- Campos requeridos
+- Validaciones de tipo (correo, números)
+- Restricciones personalizadas
+
+📸 ![Validaciones](docs/img/formulario_validaciones.png)
+
+---
+
+## AJAX
+
+### Vista que devuelve JSON desde Django:
 
 
 
+---
+
+## Recomendaciones
 
 
+---
 
-
-
+## Conclusiones
 
 
 

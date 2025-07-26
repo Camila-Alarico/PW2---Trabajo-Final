@@ -45,26 +45,47 @@
 
 <div class="mt-4">
   <h5>Exportar Apoderados</h5>
-  <button id="btn-pdf-parents" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button id="btn-pdf-download" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
   <button id="btn-email-parents" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
   <div id="status-parents" class="mt-2 text-muted"></div>
 </div>
 
-<script>
-  document.getElementById('btn-pdf-parents').addEventListener('click', function () {
-    fetch('/parents/pdf/')
-      .then(response => response.blob())
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'apoderados.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      });
-  });
+<div id="pdf-content" style="display: none;">
+  <h2 style="text-align: center;">Lista de Apoderados</h2>
+  <table border="1" cellspacing="0" cellpadding="5" width="100%">
+    <thead style="background-color: #f0f0f0;">
+      <tr>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for parent in parents %}
+      <tr>
+        <td>{{ parent.full_name }}</td>
+        <td>{{ parent.dni }}</td>
+        <td>{{ parent.phone }}</td>
+        <td>{{ parent.email }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  // Descargar PDF
+  document.getElementById('btn-pdf-download').addEventListener('click', function () {
+    const element = document.getElementById('pdf-content');
+    element.style.display = 'block';
+    html2pdf().from(element).save('apoderados.pdf');
+    setTimeout(() => element.style.display = 'none', 1000);
+  });
+</script>
+
+<script>
   document.getElementById('btn-email-parents').addEventListener('click', function () {
     fetch('/send-parents-email/')
       .then(response => response.text())

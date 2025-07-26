@@ -26,8 +26,6 @@ Entre las principales funcionalidades se incluyen:
 - [Instrucciones de instalación local](#instrucciones)
 - [Backend](#backend)
 - [FrontEnd](#frontend)
-- [AJAX](#ajax)
-- [Capturas de Pantalla](#capturas-de-pantalla)
 - [Recomendaciones](#recomendaciones)
 - [Conclusiones](#conclusiones)
 
@@ -73,56 +71,112 @@ Relaciones:
     
 ## Instrucciones de instalación local
 
-Para Django (donde este env): 
-- .\env\Scripts\Activate.ps1
-- pip install django
-- pip install django djangorestframework
-- pip install djangorestframework djangorestframework-simplejwt
-- pip install django-cors-headers
+### Para Django:
+*Requisitos:*
+Python 3.12+, PostgreSQL o SQLite
+pipenv o venv para entorno virtual
 
-Para Angular (donde este angular.json):
-- npm install
-- ng serve
+*Instalación y entorno*
+cd /ruta/del/proyecto
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 8001
+
+http://127.0.0.1:8001/
+
+### Para Angular:
+*Requisitos:*
+Node.js, npm
+Angular CLI (npm install -g @angular/cli)
+
+*Instalación:*
+cd frontend/colegio-inicial
+npm install
+ng serve
+http://localhost:4200/
 
 
 ---
 
 ## Backend
 
+### Django
+Django es un framework web de código abierto escrito en Python que facilita el desarrollo rápido y limpio de aplicaciones web complejas. Se enfoca en la reutilización de código y en la seguridad, permitiendo a los desarrolladores construir aplicaciones robustas y escalables de manera eficiente.
+
+Se hicieron modelos de:
+```python
+class Parent(models.Model):
+    full_name = models.CharField(max_length=100)
+    dni = models.CharField(max_length=10, unique=True)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    # Otros campos omitidos por brevedad
+
+class Applicant(models.Model):
+    full_name = models.CharField(max_length=100)
+    birth_date = models.DateField()
+    grade_applied = models.CharField(max_length=10, choices=[...])
+    parent = models.ForeignKey(Parent, on_delete=models.CASCADE)
+    # Relaciones con hermanos y campos adicionales
+
+class Payment(models.Model):
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    bank = models.CharField(max_length=30, choices=[...])
+
+class AdmissionStage(models.Model):
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    stage = models.CharField(max_length=20, choices=[...])
+    date = models.DateField()
+    completed = models.BooleanField(default=False)
+```
+
 Se implementaron vistas de:
 - Listado
-   
+  ![LISTADO](docs/Listado_Vistas.PNG)
 - Detalle
-  
+  ![DETALLE](docs/Detalle_Vistas.PNG)
 - Crear
-  
+  ![CREAR](docs/Crear_Vistas.PNG)
 - Actualizar
-  
+  ![ACTUALIZAR](docs/Actualizar_Vistas.PNG)
 - Eliminar 
-
-**Captura de pantalla:**
-
-📸 ![CRUD](docs/img/crud_listado.png)
-
-📸 ![Formulario](docs/img/formulario_crear.png)
-
-> 💡 Puedes agregar más capturas en `/docs/img/` y linkearlas aquí.
+  ![ELIMINAR](docs/Eliminar_Vistas.PNG)
 
 ---
 
 ## FrontEnd
 
-- Campos requeridos
-- Validaciones de tipo (correo, números)
-- Restricciones personalizadas
+### Angular:
+**Angular** es un framework de JavaScript mantenido por Google, que permite construir interfaces web de una sola página (**SPA - Single Page Application**) usando componentes reutilizables, rutas, formularios y servicios para conectarse con APIs.
 
-📸 ![Validaciones](docs/img/formulario_validaciones.png)
+### ¿Cómo se usó en el proyecto?
+- Se creó una interfaz con diseño responsive usando Angular + CSS.
+- Se definieron **rutas** para navegar entre las páginas principales.
+- Se utilizaron **componentes** para dividir la lógica en partes reutilizables (ej: `home`, `información`, `admisión`, etc.).
 
----
+- Página de inicio:  
+  ![Inicio](docs/angular_inicio.PNG)
 
-## AJAX
+- Página informativa de la Cuna UNSA:  
+  ![Información](docs/angular_info.PNG)
 
-
+- Pagina "About Us":
+  ![About Us](docs/angular_about_us.PNG)
+  
+- Pagina del listado de admisiones:
+  ![Admissions](docs/angular_admission.PNG)
+  
+- Galeria de Fotos:
+  ![Gallery](docs/angular_gallery.PNG)
+  
+- Pagina para el login de los administradores:
+  ![Login](docs/angular_login.PNG)
+  
 
 ---
 

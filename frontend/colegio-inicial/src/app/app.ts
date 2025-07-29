@@ -4,6 +4,7 @@ import { NavbarComponent } from './shared/navbar/navbar';
 import { FooterComponent } from './shared/footer/footer';
 import { ContactComponent } from './home/contact/contact';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   selector: 'app-root',
   templateUrl: './app.html',

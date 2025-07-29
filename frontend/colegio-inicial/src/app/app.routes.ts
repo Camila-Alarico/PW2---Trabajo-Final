@@ -13,6 +13,12 @@ export const routes: Routes = [
   { path: 'admissions', component: Admissions },
   { path: 'gallery', component: Gallery },
   { path: 'login', component: Contact },
-  {path: 'admin', component: Dashboard},
+  { path: 'admin', component: Dashboard},
+  { path: 'admin/postulantes',
+  loadComponent: () =>
+    import('./admin-panel/applicants/postulante-list').then(
+      m => m.PostulanteList
+    )
+}
 ];
  

@@ -1,1 +1,56 @@
-<p>postulante-list works!</p>
+<h2>Lista de Postulantes</h2>
+<a routerLink="/admin/postulantes/create" class="btn btn-primary mb-3">Nuevo Postulante</a>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Nombre</th>
+      <th>Aula</th>
+      <th>DNI</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let applicant of postulantes">
+      <td>{{ applicant.full_name }}</td>
+      <td>{{ applicant.grade_applied }}</td>
+      <td>{{ applicant.dni }}</td>
+      <td>
+        <a class="btn btn-info btn-sm me-1">Ver</a>
+        <a class="btn btn-warning btn-sm me-1">Editar</a>
+        <a class="btn btn-danger btn-sm">Eliminar</a>
+      </td>
+    </tr>
+    <tr *ngIf="postulantes.length === 0">
+      <td colspan="4">No hay postulantes registrados.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-4">
+  <h5>Exportar Postulantes</h5>
+  <button (click)="descargarPDF()" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button (click)="enviarCorreo()" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
+  <div class="mt-2 text-muted">{{ estadoCorreo }}</div>
+</div>
+
+<!-- Área oculta para PDF -->
+<div id="pdf-content" style="display: none;">
+  <h2 style="text-align: center;">Lista de Postulantes</h2>
+  <table border="1" cellspacing="0" cellpadding="5" width="100%">
+    <thead style="background-color: #f0f0f0;">
+      <tr>
+        <th>Nombre</th>
+        <th>Aula</th>
+        <th>DNI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let applicant of postulantes">
+        <td>{{ applicant.full_name }}</td>
+        <td>{{ applicant.grade_applied }}</td>
+        <td>{{ applicant.dni }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -13,12 +13,17 @@ export const routes: Routes = [
   { path: 'admissions', component: Admissions },
   { path: 'gallery', component: Gallery },
   { path: 'login', component: Contact },
-  { path: 'admin', component: Dashboard},
-  { path: 'admin/postulantes',
-  loadComponent: () =>
-    import('./admin-panel/applicants/postulante-list').then(
-      m => m.PostulanteList
-    )
-}
+  {
+    path: 'admin',
+    component: Dashboard,
+    children: [
+      { path: 'postulantes',
+        loadComponent: () =>
+          import('./admin-panel/applicants/postulante-list').then(
+            m => m.PostulanteList)
+      },
+      // Aquí luego irán padres, pagos, etapas, etc.
+    ]
+  }
 ];
  

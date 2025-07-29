@@ -28,6 +28,20 @@ export const routes: Routes = [
         import('./admin-panel/applicants/postulante-create').then(
         m => m.PostulanteCreate)
       },
+      { 
+        path: 'postulantes/editar/:id',
+        loadComponent: () =>
+          import('./admin-panel/applicants/postulante-edit').then(
+            m => m.PostulanteEdit
+          )
+      },
+      {
+        path: 'postulantes/ver/:id',
+        loadComponent: () =>
+          import('./admin-panel/applicants/postulante-view').then(
+            m => m.PostulanteView
+          )
+      },
     ]
   }
 ];

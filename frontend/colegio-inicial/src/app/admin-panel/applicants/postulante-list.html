@@ -22,9 +22,9 @@
       <td>{{ applicant.parent }}</td>
       <td>{{ applicant.has_siblings_in_school ? 'Sí' : 'No' }}</td>
       <td>
-        <button class="btn btn-info btn-sm me-1">Ver</button>
-        <button class="btn btn-warning btn-sm me-1">Editar</button>
-        <button class="btn btn-danger btn-sm">Eliminar</button>
+        <a class="btn btn-info btn-sm me-1" [routerLink]="['/admin/postulantes/ver', applicant.id]">Ver</a>
+        <button class="btn btn-warning btn-sm me-1" [routerLink]="['/admin/postulantes/editar', applicant.id]">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="eliminar(applicant.id)">Eliminar</button>
       </td>
     </tr>
     <tr *ngIf="postulantes.length === 0">

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-postulante-list',
   templateUrl: './postulante-list.html',
   styleUrl: './postulante-list.css',
-  imports: [CommonModule, HttpClientModule]
+  imports: [CommonModule, HttpClientModule, RouterModule]
 })
 export class PostulanteList implements OnInit {
   postulantes: any[] = [];
@@ -29,6 +30,20 @@ export class PostulanteList implements OnInit {
     }).subscribe({
       next: data => this.postulantes = data,
       error: err => console.error('❌ Error al obtener postulantes \n', err)
+    });
+  }
+  eliminar(id: number) {
+    const token = localStorage.getItem('access');
+    if (!confirm('¿Estás seguro de eliminar este postulante?')) return;
+
+    this.http.delete(`http://127.0.0.1:8000/api/applicants/${id}/`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: () => {
+        this.postulantes = this.postulantes.filter(p => p.id !== id);
+        console.log(`✅ Postulante ${id} eliminado`);
+      },
+      error: err => console.error('❌ Error al eliminar postulante:', err)
     });
   }
 

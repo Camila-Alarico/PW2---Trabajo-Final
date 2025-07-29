@@ -15,26 +15,32 @@ export class PostulanteCreate {
   birth_date = '';
   grade_applied = '';
   dni = '';
-  parent_id: number = 1;  // valor temporal por ahora
+  parent_id: number = 1;  // ⚠️ Reemplaza esto luego con un selector
   has_siblings_in_school = false;
-  siblings: number[] = [];  // IDs de los hermanos
+  siblings: number[] = [];
 
-  statusMessage: string = '';
+  statusMessage = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   guardarPostulante() {
+    const token = localStorage.getItem('access');
+
     const data = {
       full_name: this.full_name,
       birth_date: this.birth_date,
       grade_applied: this.grade_applied,
       dni: this.dni,
-      parent: this.parent_id,  // 👈 relación foránea
+      parent: this.parent_id,
       has_siblings_in_school: this.has_siblings_in_school,
-      siblings: this.siblings  // 👈 lista de IDs
+      siblings: this.siblings
     };
 
-    this.http.post('http://127.0.0.1:8000/api/applicants/', data).subscribe({
+    this.http.post('http://127.0.0.1:8000/api/applicants/', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
       next: () => {
         this.statusMessage = '✅ Postulante creado correctamente';
         this.router.navigate(['/admin/postulantes']);

@@ -17,14 +17,14 @@ export class Contact {
   constructor(private http: HttpClient) {}
 
   login() {
-    this.http.post('http://localhost:8001/api/token/', {
+    this.http.post('http://localhost:8000/api/token/', {
       username: this.email,
       password: this.password
     }).subscribe({
       next: (res: any) => {
         localStorage.setItem('access', res.access);
         localStorage.setItem('refresh', res.refresh);
-        window.location.href = 'http://127.0.0.1:8001/';
+        window.location.href = 'http://127.0.0.1:8000/';
       },
       error: () => {
         alert('Login incorrecto');

@@ -4,6 +4,7 @@ import { AboutUs } from './pages/about-us/about-us';
 import { Admissions } from './pages/admissions/admissions';
 import { Gallery } from './pages/gallery/gallery';
 import { Contact } from './pages/login/login';
+import { Dashboard } from './admin-panel/dashboard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,4 +13,6 @@ export const routes: Routes = [
   { path: 'admissions', component: Admissions },
   { path: 'gallery', component: Gallery },
   { path: 'login', component: Contact },
+  {path: 'admin', component: Dashboard},
 ];
+ 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   imports: [CommonModule, FormsModule],
   templateUrl: './postulante-create.html',
 })
-export class PostulanteCreate {
+export class PostulanteCreate implements OnInit {
   full_name = '';
   birth_date = '';
   grade_applied = '';
@@ -20,8 +20,30 @@ export class PostulanteCreate {
   siblings: number[] = [];
 
   statusMessage = '';
+  allPostulantes: any[] = [];
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('access');
+    if (!token) {
+      console.error('⚠️ No hay token JWT en localStorage');
+      return;
+    }
+
+    this.http.get<any[]>('http://127.0.0.1:8000/api/applicants/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
+      next: (data) => {
+        console.log('📦 Postulantes cargados:', data);
+        this.allPostulantes = data;
+      },
+      error: (err) => console.error('❌ Error cargando postulantes', err)
+    });
+  }
+
 
   guardarPostulante() {
     const token = localStorage.getItem('access');

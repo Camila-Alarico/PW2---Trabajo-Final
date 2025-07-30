@@ -7,76 +7,62 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'postulante-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './postulante-edit.html',
+  styleUrls: ['./postulante-edit.css'],
+  imports: [CommonModule, FormsModule],
 })
 export class PostulanteEdit implements OnInit {
-  id!: number;
-  full_name = '';
-  birth_date = '';
-  grade_applied = '';
-  dni = '';
-  parent_id = 1;
-  has_siblings_in_school = false;
-  siblings: number[] = [];
-
+  postulante: any = {};
+  allPostulantes: any[] = [];
   statusMessage = '';
+  id!: number;
 
   constructor(
-    private route: ActivatedRoute,
     private http: HttpClient,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     const token = localStorage.getItem('access');
+    if (!token) {
+      console.error('❌ No hay token');
+      return;
+    }
 
-    this.http.get<any>(`http://127.0.0.1:8000/api/applicants/${this.id}/`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+    // Cargar postulante actual
+    this.http.get(`http://127.0.0.1:8000/api/applicants/${this.id}/`, {
+      headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
-      next: data => {
-        this.full_name = data.full_name;
-        this.birth_date = data.birth_date;
-        this.grade_applied = data.grade_applied;
-        this.dni = data.dni;
-        this.parent_id = data.parent;
-        this.has_siblings_in_school = data.has_siblings_in_school;
-        this.siblings = data.siblings || [];
-      },
-      error: () => {
-        this.statusMessage = '❌ Error al cargar postulante';
-      }
+      next: (data) => this.postulante = data,
+      error: (err) => console.error('Error al cargar postulante', err)
+    });
+
+    // Cargar lista de todos los postulantes (para seleccionar hermanos)
+    this.http.get<any[]>('http://127.0.0.1:8000/api/applicants/', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: (data) => this.allPostulantes = data,
+      error: (err) => console.error('Error al cargar postulantes', err)
     });
   }
 
-  actualizarPostulante() {
+  guardarCambios() {
     const token = localStorage.getItem('access');
-
-    const data = {
-      full_name: this.full_name,
-      birth_date: this.birth_date,
-      grade_applied: this.grade_applied,
-      dni: this.dni,
-      parent: this.parent_id,
-      has_siblings_in_school: this.has_siblings_in_school,
-      siblings: this.siblings
-    };
-
-    this.http.put(`http://127.0.0.1:8000/api/applicants/${this.id}/`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+    this.http.put(`http://127.0.0.1:8000/api/applicants/${this.id}/`, this.postulante, {
+      headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: () => {
-        this.statusMessage = '✅ Postulante actualizado correctamente';
+        this.statusMessage = '✅ Cambios guardados correctamente';
         this.router.navigate(['/admin/postulantes']);
       },
       error: () => {
-        this.statusMessage = '❌ Error al actualizar postulante';
+        this.statusMessage = '❌ Error al guardar cambios';
       }
     });
+  }
+  volver() {
+    this.router.navigate(['/admin/postulantes']);
   }
 }

@@ -5,10 +5,8 @@
   <thead class="table-dark">
     <tr>
       <th>Nombre</th>
-      <th>Fecha Nac.</th>
       <th>Aula</th>
       <th>DNI</th>
-      <th>Apoderado (ID)</th>
       <th>Tiene Hermanos</th>
       <th>Acciones</th>
     </tr>
@@ -16,11 +14,9 @@
   <tbody>
     <tr *ngFor="let applicant of postulantes">
       <td>{{ applicant.full_name }}</td>
-      <td>{{ applicant.birth_date }}</td>
       <td>{{ applicant.grade_applied }}</td>
       <td>{{ applicant.dni }}</td>
-      <td>{{ applicant.parent }}</td>
-      <td>{{ applicant.has_siblings_in_school ? 'Sí' : 'No' }}</td>
+      <td>{{ applicant.has_siblings_in_school ? '✔' : '❌' }}</td>
       <td>
         <a class="btn btn-info btn-sm me-1" [routerLink]="['/admin/postulantes/ver', applicant.id]">Ver</a>
         <button class="btn btn-warning btn-sm me-1" [routerLink]="['/admin/postulantes/editar', applicant.id]">Editar</button>

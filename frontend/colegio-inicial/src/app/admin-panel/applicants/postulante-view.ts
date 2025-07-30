@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class PostulanteView implements OnInit {
   postulante: any = {};
   postulantes: any[] = [];
+  parents: any[] = [];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
 
@@ -29,6 +30,18 @@ export class PostulanteView implements OnInit {
       },
       error: () => alert('❌ No se pudo cargar el postulante')
     });
+
+    this.http.get<any[]>('http://127.0.0.1:8000/api/parents/', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: (parents) => {
+        this.parents = parents;
+        const padre = parents.find(p => p.id === this.postulante.parent);
+        this.postulante.parent_name = padre ? padre.full_name : 'Desconocido';
+      },
+      error: () => console.warn('⚠️ No se pudo cargar apoderado')
+    });
+
   }
 
   cargarHermanos() {

@@ -40,10 +40,19 @@
         <small class="text-muted">Puedes seleccionar varios con Ctrl o Cmd</small>
     </div>
   
-  <div class="mb-3">
-    <label class="form-label">ID del Padre</label>
-    <input type="number" class="form-control" [(ngModel)]="parent_id" name="parent_id" required>
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Apoderado</label>
+        <div class="d-flex">
+            <select class="form-select me-2" [(ngModel)]="parent_id" name="parent_id" required>
+            <option *ngFor="let parent of parents" [value]="parent.id">
+                {{ parent.full_name }}
+            </option>
+            </select>
+            <a routerLink="/admin/padres/crear" class="btn btn-outline-primary">+</a>
+        </div>
+        <small class="text-muted">Si no existe el padre, puedes crearlo aquí</small>
+    </div>
+
 
   <button type="submit" class="btn btn-success">Guardar</button>
 </form>

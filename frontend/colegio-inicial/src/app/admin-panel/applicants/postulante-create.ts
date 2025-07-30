@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'postulante-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './postulante-create.html',
 })
 export class PostulanteCreate implements OnInit {
@@ -21,6 +23,8 @@ export class PostulanteCreate implements OnInit {
 
   statusMessage = '';
   allPostulantes: any[] = [];
+  parents: any[] = [];
+
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -42,6 +46,13 @@ export class PostulanteCreate implements OnInit {
       },
       error: (err) => console.error('❌ Error cargando postulantes', err)
     });
+    // Cargar padres
+      this.http.get<any[]>('http://127.0.0.1:8000/api/parents/', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).subscribe({
+        next: (data) => this.parents = data,
+        error: (err) => console.error('❌ Error cargando padres', err)
+      });
   }
 
 

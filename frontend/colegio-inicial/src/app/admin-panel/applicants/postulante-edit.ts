@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class PostulanteEdit implements OnInit {
   postulante: any = {};
   allPostulantes: any[] = [];
+  parents: any[] = []; // ✅ Lista de padres
   statusMessage = '';
   id!: number;
 
@@ -31,7 +32,7 @@ export class PostulanteEdit implements OnInit {
       return;
     }
 
-    // Cargar postulante actual
+    // 📦 Cargar postulante actual
     this.http.get(`http://127.0.0.1:8000/api/applicants/${this.id}/`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
@@ -39,12 +40,20 @@ export class PostulanteEdit implements OnInit {
       error: (err) => console.error('Error al cargar postulante', err)
     });
 
-    // Cargar lista de todos los postulantes (para seleccionar hermanos)
+    // 👨‍👩‍👧‍👦 Cargar todos los postulantes para seleccionar hermanos
     this.http.get<any[]>('http://127.0.0.1:8000/api/applicants/', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: (data) => this.allPostulantes = data,
       error: (err) => console.error('Error al cargar postulantes', err)
+    });
+
+    // 👨‍👦 Cargar padres para el <select>
+    this.http.get<any[]>('http://127.0.0.1:8000/api/parents/', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: (data) => this.parents = data,
+      error: (err) => console.error('Error al cargar padres', err)
     });
   }
 
@@ -62,6 +71,7 @@ export class PostulanteEdit implements OnInit {
       }
     });
   }
+
   volver() {
     this.router.navigate(['/admin/postulantes']);
   }

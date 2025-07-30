@@ -1,0 +1,39 @@
+<!-- dashboard.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/admin">Cuna UNSA - Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar"
+      aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="adminNavbar">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Postulantes -->
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/postulantes">Postulantes</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/postulantes/crear">Crear Postulante</a></li>
+
+        <!-- Padres -->
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/padres">Padres</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/padres/crear">Crear Padre</a></li>
+
+        <!-- Pagos -->
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/pagos">Pagos</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/pagos/crear">Crear Pago</a></li>
+
+        <!-- Etapas -->
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/etapas">Etapas</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/etapas/crear">Crear Etapa</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="text-center text-muted mt-5 mb-3">
+  <small>&copy; 2024 Cuna UNSA - Panel de Admisión</small>
+</footer>

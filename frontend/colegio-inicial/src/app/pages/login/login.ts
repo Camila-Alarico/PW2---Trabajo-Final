@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../auth'; // Asegúrate que el path sea correcto
 
 @Component({
   selector: 'app-contact',
@@ -14,17 +14,14 @@ export class Contact {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private auth: AuthService) {}
 
   login() {
-    this.http.post('http://localhost:8001/api/token/', {
-      username: this.email,
-      password: this.password
-    }).subscribe({
+    this.auth.login(this.email, this.password).subscribe({
       next: (res: any) => {
         localStorage.setItem('access', res.access);
         localStorage.setItem('refresh', res.refresh);
-        window.location.href = 'http://127.0.0.1:8001/';
+        window.location.href = '/admin';
       },
       error: () => {
         alert('Login incorrecto');
@@ -33,10 +30,7 @@ export class Contact {
   }
 
   getApplicants() {
-    const token = localStorage.getItem('access');
-    this.http.get('http://localhost:8001/api/applicants/', {
-      headers: { Authorization: `Bearer ${token}` }
-    }).subscribe({
+    this.auth.getApplicants().subscribe({
       next: (res) => {
         console.log('Applicants:', res);
       },

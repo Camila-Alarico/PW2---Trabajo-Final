@@ -1,0 +1,69 @@
+<h2>Lista de Apoderados</h2>
+<a routerLink="/admin/padres/crear" class="btn btn-primary mb-3">Nuevo Apoderado</a>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Nombre</th>
+      <th>DNI</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Vínculo Univ.</th>
+      <th>Datos Univ.</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parent of parents">
+      <td>{{ parent.full_name }}</td>
+      <td>{{ parent.dni }}</td>
+      <td>{{ parent.email }}</td>
+      <td>{{ parent.phone }}</td>
+      <td>{{ parent.has_university_affiliation ? 'Sí' : 'No' }}</td>
+      <td>
+        <ng-container *ngIf="parent.has_university_affiliation; else noData">
+          {{ parent.university_role }}, {{ parent.university_area }}
+        </ng-container>
+        <ng-template #noData>-</ng-template>
+    </td>
+    <td>
+        <a [routerLink]="['/admin/padres/ver', parent.id]" class="btn btn-info btn-sm me-1">Ver</a>
+        <a [routerLink]="['/admin/padres/editar', parent.id]" class="btn btn-warning btn-sm me-1">Editar</a>
+        <button class="btn btn-danger btn-sm" (click)="eliminar(parent.id)">Eliminar</button>
+    </td>
+    </tr>
+    <tr *ngIf="parents.length === 0">
+      <td colspan="7">No hay apoderados registrados.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-4">
+  <h5>Exportar Apoderados</h5>
+  <button (click)="descargarPDF()" class="btn btn-outline-primary mb-2">📄 Descargar PDF</button>
+  <button (click)="enviarCorreo()" class="btn btn-outline-success">✉️ Enviar PDF por correo</button>
+  <div class="mt-2 text-muted">{{ estadoCorreo }}</div>
+</div>
+
+<!-- Área oculta para PDF -->
+<div id="pdf-content" style="display: none;">
+  <h2 style="text-align: center;">Lista de Apoderados</h2>
+  <table border="1" cellspacing="0" cellpadding="5" width="100%">
+    <thead style="background-color: #f0f0f0;">
+      <tr>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parent of parents">
+        <td>{{ parent.full_name }}</td>
+        <td>{{ parent.dni }}</td>
+        <td>{{ parent.phone }}</td>
+        <td>{{ parent.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

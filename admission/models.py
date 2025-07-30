@@ -60,6 +60,7 @@ class Applicant(models.Model):
     GRADE_CHOICES = [
         ('1 año', '1 año'),
         ('2 años', '2 años'),
+        ('3 años', '3 años'),
         ('4 años', '4 años'),
         ('5 años', '5 años'),
     ]

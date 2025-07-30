@@ -1,0 +1,61 @@
+<form (ngSubmit)="guardarPostulante()">
+  <div class="mb-3">
+    <label class="form-label">Nombre Completo</label>
+    <input type="text" class="form-control" [(ngModel)]="full_name" name="full_name" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Fecha de Nacimiento</label>
+    <input type="date" class="form-control" [(ngModel)]="birth_date" name="birth_date" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Aula</label>
+    <select class="form-select" [(ngModel)]="grade_applied" name="grade_applied" required>
+      <option value="1 año">1 año</option>
+      <option value="2 años">2 años</option>
+      <option value="3 años">3 años</option>
+      <option value="4 años">4 años</option>
+      <option value="5 años">5 años</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">DNI</label>
+    <input type="text" class="form-control" [(ngModel)]="dni" name="dni" required>
+  </div>
+
+    <!-- Tiene hermanos -->
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="has_siblings_in_school" name="has_siblings_in_school" id="checkHermanos">
+        <label class="form-check-label" for="checkHermanos">¿Tiene hermanos en la escuela?</label>
+    </div>
+
+    <!-- Selección de hermanos (solo si tiene hermanos) -->
+    <div class="mb-3" *ngIf="has_siblings_in_school">
+        <label class="form-label">Seleccionar Hermanos</label>
+        <select class="form-select" multiple [(ngModel)]="siblings" name="siblings">
+            <option *ngFor="let p of allPostulantes" [value]="p.id">{{ p.full_name }}</option>
+        </select>
+        <small class="text-muted">Puedes seleccionar varios con Ctrl o Cmd</small>
+    </div>
+  
+    <div class="mb-3">
+        <label class="form-label">Apoderado</label>
+        <div class="d-flex">
+            <select class="form-select me-2" [(ngModel)]="parent_id" name="parent_id" required>
+            <option *ngFor="let parent of parents" [value]="parent.id">
+                {{ parent.full_name }}
+            </option>
+            </select>
+            <a routerLink="/admin/padres/crear" class="btn btn-outline-primary">+</a>
+        </div>
+        <small class="text-muted">Si no existe el padre, puedes crearlo aquí</small>
+    </div>
+
+
+  <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+
+<!-- Mensaje final -->
+<p class="mt-3 text-muted">{{ statusMessage }}</p>

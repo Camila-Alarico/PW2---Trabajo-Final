@@ -1,0 +1,32 @@
+<h2>Etapas del Proceso de Admisión</h2>
+
+<a routerLink="/admin/etapas/crear" class="btn btn-primary mb-3">Nueva Etapa</a>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Postulante</th>
+      <th>Etapa</th>
+      <th>Fecha</th>
+      <th>Completado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stage of stages">
+      <td>{{ stage.applicant_full_name }}</td>
+      <td>{{ stage.stage }}</td>
+      <td>{{ stage.date }}</td>
+      <td>{{ stage.completed ? '✔' : '✖' }}</td>
+      <td>
+        <a [routerLink]="['/admin/etapas/editar', stage.id]" class="btn btn-sm btn-outline-primary me-2">Editar</a>
+        <button (click)="eliminarEtapa(stage.id)" class="btn btn-sm btn-outline-danger">Eliminar</button>
+      </td>
+    </tr>
+    <tr *ngIf="stages.length === 0">
+      <td colspan="5" class="text-center">No hay etapas registradas.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="mt-2 text-muted">{{ statusMessage }}</p>

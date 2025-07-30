@@ -1,0 +1,20 @@
+<h2>Detalle del Postulante</h2>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Nombre:</strong> {{ postulante.full_name }}</li>
+    <li class="list-group-item"><strong>Fecha de Nacimiento:</strong> {{ postulante.birth_date }}</li>
+    <li class="list-group-item"><strong>Aula:</strong> {{ postulante.grade_applied }}</li>
+    <li class="list-group-item"><strong>DNI:</strong> {{ postulante.dni }}</li>
+    <li class="list-group-item"><strong>Apoderado:</strong> {{ postulante.parent_name || 'No asignado' }}</li>
+    <li class="list-group-item"><strong>¿Tiene hermanos?:</strong> {{ postulante.has_siblings_in_school ? 'Sí' : 'No' }}</li>
+
+    <li class="list-group-item" *ngIf="postulante.has_siblings_in_school">
+        <strong>Hermanos:</strong>
+        <ul *ngIf="postulante.sibling_names?.length > 0; else noHermanos">
+            <li *ngFor="let nombre of postulante.sibling_names">{{ nombre }}</li>
+        </ul>
+        <ng-template #noHermanos><em>Ninguno</em></ng-template>
+    </li>
+</ul>
+
+<button class="btn btn-secondary mt-3" (click)="volver()">Volver</button>

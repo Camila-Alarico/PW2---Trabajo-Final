@@ -16,11 +16,20 @@ export class PostulanteList implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/applicants/')
-      .subscribe({
-        next: data => this.postulantes = data,
-        error: err => console.error('Error al obtener postulantes', err)
-      });
+    const token = localStorage.getItem('access');
+    if (!token) {
+      console.error('⚠️ No hay token JWT en localStorage');
+      return;
+    }
+
+    this.http.get<any[]>('http://127.0.0.1:8000/api/applicants/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
+      next: data => this.postulantes = data,
+      error: err => console.error('❌ Error al obtener postulantes \n', err)
+    });
   }
 
   descargarPDF() {

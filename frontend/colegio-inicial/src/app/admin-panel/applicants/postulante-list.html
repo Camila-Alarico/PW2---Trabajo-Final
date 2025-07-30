@@ -1,28 +1,34 @@
 <h2>Lista de Postulantes</h2>
-<a routerLink="/admin/postulantes/create" class="btn btn-primary mb-3">Nuevo Postulante</a>
+<a routerLink="/admin/postulantes/crear" class="btn btn-primary mb-3">Nuevo Postulante</a>
 
 <table class="table table-bordered table-hover">
   <thead class="table-dark">
     <tr>
       <th>Nombre</th>
+      <th>Fecha Nac.</th>
       <th>Aula</th>
       <th>DNI</th>
+      <th>Apoderado (ID)</th>
+      <th>Tiene Hermanos</th>
       <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let applicant of postulantes">
       <td>{{ applicant.full_name }}</td>
+      <td>{{ applicant.birth_date }}</td>
       <td>{{ applicant.grade_applied }}</td>
       <td>{{ applicant.dni }}</td>
+      <td>{{ applicant.parent }}</td>
+      <td>{{ applicant.has_siblings_in_school ? 'Sí' : 'No' }}</td>
       <td>
-        <a class="btn btn-info btn-sm me-1">Ver</a>
-        <a class="btn btn-warning btn-sm me-1">Editar</a>
-        <a class="btn btn-danger btn-sm">Eliminar</a>
+        <button class="btn btn-info btn-sm me-1">Ver</button>
+        <button class="btn btn-warning btn-sm me-1">Editar</button>
+        <button class="btn btn-danger btn-sm">Eliminar</button>
       </td>
     </tr>
     <tr *ngIf="postulantes.length === 0">
-      <td colspan="4">No hay postulantes registrados.</td>
+      <td colspan="7">No hay postulantes registrados.</td>
     </tr>
   </tbody>
 </table>
@@ -41,15 +47,19 @@
     <thead style="background-color: #f0f0f0;">
       <tr>
         <th>Nombre</th>
+        <th>Fecha Nac.</th>
         <th>Aula</th>
         <th>DNI</th>
+        <th>Apoderado</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let applicant of postulantes">
         <td>{{ applicant.full_name }}</td>
+        <td>{{ applicant.birth_date }}</td>
         <td>{{ applicant.grade_applied }}</td>
         <td>{{ applicant.dni }}</td>
+        <td>{{ applicant.parent }}</td>
       </tr>
     </tbody>
   </table>

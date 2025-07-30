@@ -1,0 +1,46 @@
+<form (ngSubmit)="guardarPostulante()">
+  <!-- Nombre -->
+  <div class="mb-3">
+    <label class="form-label">Nombre Completo</label>
+    <input type="text" class="form-control" [(ngModel)]="full_name" name="full_name" required>
+  </div>
+
+  <!-- Fecha de nacimiento -->
+  <div class="mb-3">
+    <label class="form-label">Fecha de Nacimiento</label>
+    <input type="date" class="form-control" [(ngModel)]="birth_date" name="birth_date" required>
+  </div>
+
+  <!-- Aula -->
+  <div class="mb-3">
+    <label class="form-label">Aula</label>
+    <select class="form-select" [(ngModel)]="grade_applied" name="grade_applied" required>
+      <option value="1 año">1 año</option>
+      <option value="2 años">2 años</option>
+      <option value="3 años">3 años</option>
+      <option value="4 años">4 años</option>
+      <option value="5 años">5 años</option>
+    </select>
+  </div>
+
+  <!-- DNI -->
+  <div class="mb-3">
+    <label class="form-label">DNI</label>
+    <input type="text" class="form-control" [(ngModel)]="dni" name="dni" required>
+  </div>
+
+  <!-- Tiene hermanos -->
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="has_siblings_in_school" name="has_siblings_in_school">
+    <label class="form-check-label">¿Tiene hermanos en la escuela?</label>
+  </div>
+
+  <!-- Padre temporal -->
+  <div class="mb-3">
+    <label class="form-label">ID del Padre</label>
+    <input type="number" class="form-control" [(ngModel)]="parent_id" name="parent_id" required>
+  </div>
+
+  <!-- Botón -->
+  <button type="submit" class="btn btn-success">Guardar</button>
+</form>

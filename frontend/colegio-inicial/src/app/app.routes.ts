@@ -17,12 +17,17 @@ export const routes: Routes = [
     path: 'admin',
     component: Dashboard,
     children: [
+      { path: '', redirectTo: 'postulantes', pathMatch: 'full' },
       { path: 'postulantes',
         loadComponent: () =>
           import('./admin-panel/applicants/postulante-list').then(
             m => m.PostulanteList)
       },
-      // Aquí luego irán padres, pagos, etapas, etc.
+      { path: 'postulantes/crear',
+        loadComponent: () =>
+        import('./admin-panel/applicants/postulante-create').then(
+        m => m.PostulanteCreate)
+      },
     ]
   }
 ];

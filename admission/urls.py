@@ -28,7 +28,7 @@ urlpatterns = [
     path('stages/<int:pk>/delete/', views.AdmissionStageDeleteView.as_view(), name='stage_delete'),
 
     # API JSON
-    path('api/applicants/', views.applicant_json_api, name='applicant_json_api'),
+   path('api/applicants/', views.ApplicantListAPIView.as_view(), name='applicant_list_api'),
 
     # AJAX DEMO PAGE
     path('ajax-demo/', lambda r: render(r, 'admission/ajax_list.html'), name='ajax_demo'),

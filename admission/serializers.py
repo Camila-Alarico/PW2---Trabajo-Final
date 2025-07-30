@@ -4,4 +4,4 @@ from .models import Applicant
 class ApplicantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
-        fields = '__all__'
+        fields = ['id', 'full_name', 'grade_applied', 'dni']

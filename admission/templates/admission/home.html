@@ -2,11 +2,11 @@
 {% block content %}
 <h2>Bienvenido/a al Sistema de Admisión Cuna UNSA</h2>
 <p>Has iniciado sesión como: {{ user.username }}</p>
-<ul>
+<ul style="list-style-type: none; padding-left: 0;">
     <li><a href="{% url 'applicant_list' %}" class="btn btn-outline-primary btn-sm">Postulantes</a></li>
-    <li><a href="{% url 'parent_list' %}">Apoderados</a></li>
-    <li><a href="{% url 'payment_list' %}">Pagos</a></li>
-    <li><a href="{% url 'stage_list' %}">Etapas</a></li>
+    <li><a href="{% url 'parent_list' %}" class="btn btn-outline-primary btn-sm">Apoderados</a></li>
+    <li><a href="{% url 'payment_list' %}" class="btn btn-outline-primary btn-sm">Pagos</a></li>
+    <li><a href="{% url 'stage_list' %}" class="btn btn-outline-primary btn-sm">Etapas</a></li>
 <form action="{% url 'logout' %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>

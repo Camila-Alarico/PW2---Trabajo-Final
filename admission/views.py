@@ -132,9 +132,11 @@ class AdmissionStageCreateView(CreateView):
     template_name = 'admission/stage_form.html'
     success_url = reverse_lazy('stage_list')
 
-def applicant_json_api(request):
-    data = list(Applicant.objects.values('id', 'full_name', 'grade_applied', 'dni'))
-    return JsonResponse(data, safe=False)
+class ApplicantListAPIView(APIView):
+    def get(self, request):
+        applicants = Applicant.objects.all()
+        serializer = ApplicantSerializer(applicants, many=True)
+        return Response(serializer.data)
 
 # Poner base en la pagina principal
 def home(request):

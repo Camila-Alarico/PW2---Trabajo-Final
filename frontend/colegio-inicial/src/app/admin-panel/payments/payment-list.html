@@ -1,0 +1,31 @@
+<h2>Pagos de Admisión</h2>
+<a routerLink="/admin/pagos/crear" class="btn btn-primary mb-3">Nuevo Pago</a>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Postulante</th>
+      <th>Monto</th>
+      <th>Banco</th>
+      <th>Voucher</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let payment of payments">
+      <td>{{ payment.applicant_name }}</td>
+      <td>S/. {{ payment.amount }}</td>
+      <td>{{ payment.bank }}</td>
+      <td>{{ payment.voucher_number }}</td>
+      <td>{{ payment.payment_date }}</td>
+      <td>
+        <a [routerLink]="['/admin/pagos/editar', payment.id]" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+        <button (click)="eliminar(payment.id)" class="btn btn-sm btn-outline-danger">Eliminar</button>
+      </td>
+    </tr>
+    <tr *ngIf="payments.length === 0">
+      <td colspan="6">No hay pagos registrados.</td>
+    </tr>
+  </tbody>
+</table>

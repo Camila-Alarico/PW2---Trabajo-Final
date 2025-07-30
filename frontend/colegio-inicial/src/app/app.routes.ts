@@ -42,10 +42,19 @@ export const routes: Routes = [
             m => m.PostulanteView
           )
       },
+      
+
       { path: 'padres', loadComponent: () => import('./admin-panel/parents/parent-list').then(m => m.ParentList) },
       { path: 'padres/crear', loadComponent: () => import('./admin-panel/parents/parent-create').then(m => m.ParentCreate) },
       { path: 'padres/editar/:id', loadComponent: () => import('./admin-panel/parents/parent-edit').then(m => m.ParentEdit) },
       { path: 'padres/ver/:id', loadComponent: () => import('./admin-panel/parents/parent-view').then(m => m.ParentView) },
+      {
+        path: 'pagos',
+        loadComponent: () =>
+          import('./admin-panel/payments/payment-list').then(m => m.PaymentList)
+      },
+      { path: 'pagos/editar/:id', loadComponent: () => import('./admin-panel/payments/payment-edit').then(m => m.PaymentEdit) },
+      { path: 'pagos/crear', loadComponent: () => import('./admin-panel/payments/payment-create').then(m => m.PaymentCreate) },
 
     ]
   }

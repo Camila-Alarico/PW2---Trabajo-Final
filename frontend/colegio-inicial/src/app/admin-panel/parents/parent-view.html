@@ -1,0 +1,20 @@
+<h2>Detalle del Apoderado</h2>
+
+<ul class="list-group" *ngIf="parent">
+  <li class="list-group-item"><strong>Nombre:</strong> {{ parent.full_name }}</li>
+  <li class="list-group-item"><strong>DNI:</strong> {{ parent.dni }}</li>
+  <li class="list-group-item"><strong>Email:</strong> {{ parent.email }}</li>
+  <li class="list-group-item"><strong>Teléfono:</strong> {{ parent.phone }}</li>
+  <li class="list-group-item"><strong>Dirección:</strong> {{ parent.address || 'No registrada' }}</li>
+  <li class="list-group-item"><strong>Ocupación:</strong> {{ parent.occupation || 'No registrada' }}</li>
+  <li class="list-group-item"><strong>Nivel educativo:</strong> {{ parent.education_level || 'No especificado' }}</li>
+  <li class="list-group-item"><strong>Estado civil:</strong> {{ parent.marital_status || 'No especificado' }}</li>
+  <li class="list-group-item"><strong>¿Vínculo con la universidad?:</strong> {{ parent.has_university_affiliation ? 'Sí' : 'No' }}</li>
+  <li class="list-group-item" *ngIf="parent.has_university_affiliation">
+    <strong>Cargo:</strong> {{ parent.university_role }}<br>
+    <strong>Área:</strong> {{ parent.university_area }}<br>
+    <strong>Detalles:</strong> {{ parent.university_relationship_details }}
+  </li>
+</ul>
+
+<button class="btn btn-secondary mt-3" (click)="volver()">Volver</button>

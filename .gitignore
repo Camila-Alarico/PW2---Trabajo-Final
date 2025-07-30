@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# SQLite
+db.sqlite3
+
+# Environments
+.env
+*.env
+venv/
+env/
+.venv/
+
+# Django stuff
+*.log
+local_settings.py
+
+# Node.js / Angular (si también usas frontend)
+node_modules/
+dist/
+*.log
+
+# Mac OS
+.DS_Store
+

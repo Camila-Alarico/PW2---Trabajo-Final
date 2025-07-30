@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Applicant, Parent, Payment
+from .models import Applicant, Parent, Payment, AdmissionStage
 
 class ApplicantSerializer(serializers.ModelSerializer):
     parent_name = serializers.StringRelatedField(source='parent', read_only=True)
@@ -18,4 +18,11 @@ class PaymentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Payment
+        fields = '__all__'
+
+class AdmissionStageSerializer(serializers.ModelSerializer):
+    applicant_full_name = serializers.CharField(source='applicant.full_name', read_only=True)
+
+    class Meta:
+        model = AdmissionStage
         fields = '__all__'

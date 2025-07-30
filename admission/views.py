@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import Applicant, Parent, Payment
-from .serializers import ApplicantSerializer, ParentSerializer, PaymentSerializer
+from .models import Applicant, Parent, Payment, AdmissionStage
+from .serializers import ApplicantSerializer, ParentSerializer, PaymentSerializer, AdmissionStageSerializer
 
 class ApplicantViewSet(viewsets.ModelViewSet):
     queryset = Applicant.objects.all()
@@ -17,4 +17,10 @@ class ParentViewSet(viewsets.ModelViewSet):
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all().order_by('-payment_date')
     serializer_class = PaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class AdmissionStageViewSet(viewsets.ModelViewSet):
+    queryset = AdmissionStage.objects.all()
+    serializer_class = AdmissionStageSerializer
     permission_classes = [IsAuthenticated]

@@ -48,6 +48,7 @@ export const routes: Routes = [
       { path: 'padres/crear', loadComponent: () => import('./admin-panel/parents/parent-create').then(m => m.ParentCreate) },
       { path: 'padres/editar/:id', loadComponent: () => import('./admin-panel/parents/parent-edit').then(m => m.ParentEdit) },
       { path: 'padres/ver/:id', loadComponent: () => import('./admin-panel/parents/parent-view').then(m => m.ParentView) },
+      
       {
         path: 'pagos',
         loadComponent: () =>
@@ -56,7 +57,11 @@ export const routes: Routes = [
       { path: 'pagos/editar/:id', loadComponent: () => import('./admin-panel/payments/payment-edit').then(m => m.PaymentEdit) },
       { path: 'pagos/crear', loadComponent: () => import('./admin-panel/payments/payment-create').then(m => m.PaymentCreate) },
 
+      { path: 'etapas', loadComponent: () => import('./admin-panel/stages/stage-list').then(m => m.StageList)},
+      { path: 'etapas/crear', loadComponent: () => import('./admin-panel/stages/stage-create').then(m => m.StageCreate)},
+      { path: 'etapas/editar/:id', loadComponent: () => import('./admin-panel/stages/stage-edit').then(m => m.StageEdit)}
+
     ]
   }
 ];
- 
+  

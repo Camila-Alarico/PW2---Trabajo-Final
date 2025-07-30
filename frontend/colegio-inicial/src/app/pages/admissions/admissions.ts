@@ -14,7 +14,7 @@ export interface Applicant {
   providedIn: 'root',
 })
 export class ApplicantService {
-  private apiUrl = 'http://localhost:8000/api/applicants/'; // Asegúrate de usar el puerto correcto
+  private apiUrl = 'http://localhost:8000/api/public-applicants/'; // Asegúrate de usar el puerto correcto
 
   constructor(private http: HttpClient) {}
 

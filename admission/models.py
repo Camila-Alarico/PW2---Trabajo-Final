@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.db import models
-
 class Parent(models.Model):
     full_name = models.CharField("Nombre completo", max_length=100)
     dni = models.CharField("DNI", max_length=10, unique=True)
@@ -72,7 +70,8 @@ class Applicant(models.Model):
     parent = models.ForeignKey('Parent', on_delete=models.CASCADE, related_name='children')
     has_siblings_in_school = models.BooleanField(default=False)
     siblings = models.ManyToManyField('self', blank=True, symmetrical=True)
-
+    is_admitted = models.BooleanField("Admitido", default=False)
+    
     def __str__(self):
         return f"{self.full_name} - {self.grade_applied}"
 
@@ -92,17 +91,22 @@ class Payment(models.Model):
     def __str__(self):
         return f"Pago de {self.applicant.full_name} - {self.voucher_number}"
 
-class AdmissionStage(models.Model):
-    STAGE_CHOICES = [
-        ('Entrevista', 'Entrevista'),
-        ('Convivencia', 'Convivencia'),
-        ('Matrícula', 'Matrícula'),
-    ]
+class AdmissionProcess(models.Model):
+    applicant = models.OneToOneField('Applicant', on_delete=models.CASCADE, related_name='admission_process')
+    entrevista = models.BooleanField(default=False)
+    convivencia = models.BooleanField(default=False)
+    matricula = models.BooleanField(default=False)
 
-    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
-    stage = models.CharField(max_length=20, choices=STAGE_CHOICES)
-    date = models.DateField()
-    completed = models.BooleanField(default=False)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.entrevista and self.convivencia and self.matricula:
+            if not self.applicant.is_admitted:
+                self.applicant.is_admitted = True
+                self.applicant.save()
+        else:
+            if self.applicant.is_admitted:
+                self.applicant.is_admitted = False
+                self.applicant.save()
 
     def __str__(self):
-        return f"{self.stage} - {self.applicant.full_name}"
+        return f"Proceso de {self.applicant.full_name}"
